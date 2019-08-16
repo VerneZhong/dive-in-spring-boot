@@ -1,3 +1,9 @@
+# Initializers
 org.springframework.context.ApplicationContextInitializer=\
 com.zxb.springapplication.context.HelloWorldApplicationContextInitializer,\
 com.zxb.springapplication.context.AfterHelloWorldApplicationContextInitializer
+
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+com.zxb.springapplication.listener.AfterMyApplicationListener,\
+com.zxb.springapplication.listener.MyApplicationListener
