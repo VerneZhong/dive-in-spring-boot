@@ -14,7 +14,7 @@ import org.springframework.core.annotation.Order;
 public class AfterMyApplicationListener implements ApplicationListener<ContextRefreshedEvent>, Ordered {
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        System.out.println("After My: " + event.getApplicationContext().getId() + ", timestamp: " + event.getTimestamp());
+        System.out.println("After My ApplicationListener : " + event.getApplicationContext().getId() + ", timestamp: " + event.getTimestamp());
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * {@link org.springframework.boot.SpringApplication} 引导类
+ * {@link SpringApplication} 引导类
  *
  * @author Mr.zxb
  * @date 2019-08-15 15:06

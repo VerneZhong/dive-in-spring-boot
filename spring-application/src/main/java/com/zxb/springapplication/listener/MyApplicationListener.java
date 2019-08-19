@@ -19,6 +19,6 @@ public class MyApplicationListener implements ApplicationListener<ContextRefresh
      */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        System.out.println("My: " + event.getApplicationContext().getId() + ", timestamp: " + event.getTimestamp());
+        System.out.println("My ApplicationListener : " + event.getApplicationContext().getId() + ", timestamp: " + event.getTimestamp());
     }
 }
