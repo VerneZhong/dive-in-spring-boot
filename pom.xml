@@ -20,6 +20,7 @@
         <module>autoconfigure</module>
         <module>spring-application</module>
         <module>spring-webmvc</module>
+        <module>springboot-webmvc</module>
     </modules>
 
 	<name>dive-in-spring-boot</name>
