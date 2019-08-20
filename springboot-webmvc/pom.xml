@@ -30,6 +30,7 @@
             <version>${jstl.version}</version>
         </dependency>
 
+        <!-- Spring Boot JSP 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
