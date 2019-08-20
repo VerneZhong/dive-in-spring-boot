@@ -39,7 +39,7 @@
     </dependencies>
 
     <!-- tomcat插件 -->
-    <!-- maven打包命令: mvn -Dmaven.test.skip -U clean package-->
+    <!-- maven打包命令: mvn -Dmaven.test.skip -U clean package -->
     <!-- 借助idea Remote debug模式： -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -->
     <!-- 内嵌Tomcat容器，启动war命令：java -jar target\spring-webmvc-0.0.1-SNAPSHOT-war-exec.jar -->
     <build>
