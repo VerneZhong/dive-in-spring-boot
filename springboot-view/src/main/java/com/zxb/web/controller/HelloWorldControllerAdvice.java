@@ -28,7 +28,7 @@ public class HelloWorldControllerAdvice {
      * @return
      */
     @ModelAttribute("sessionId")
-    public String sessionId(@CookieValue("JSESSIONID") String sessionId) {
+    public String sessionId(@CookieValue(value = "JSESSIONID", required = false) String sessionId) {
         return sessionId;
     }
 

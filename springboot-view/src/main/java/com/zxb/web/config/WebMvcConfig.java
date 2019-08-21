@@ -26,13 +26,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
      * @return
      */
     @Bean
-    public ViewResolver viewResolver() {
+    public ViewResolver myViewResolver() {
 //        InternalResourceViewResolver viewResolver = new CustomizeInternalResourceViewResolver();
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/jsp/");
         viewResolver.setSuffix(".jsp");
-        viewResolver.setOrder(Ordered.LOWEST_PRECEDENCE - 6);
+        // 设置优先级
+        viewResolver.setOrder(Ordered.LOWEST_PRECEDENCE - 10);
+        // 配置ViewResolver的Content-Type
+        viewResolver.setContentType("text/xml;charset=UTF-8");
         return viewResolver;
     }
 
@@ -54,6 +57,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         });
     }
 
+    /**
+     * 内容协商
+     * @param configurer
+     */
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         configurer.favorParameter(true)

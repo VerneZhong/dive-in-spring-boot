@@ -28,4 +28,9 @@ public class HelloWorldController {
         return "index";
     }
 
+    @RequestMapping("/thymeleaf")
+    public String thymeleaf() {
+        return "thymeleaf";
+    }
+
 }
