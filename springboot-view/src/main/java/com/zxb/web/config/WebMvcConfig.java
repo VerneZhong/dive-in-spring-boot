@@ -1,15 +1,12 @@
 package com.zxb.web.config;
 
-import com.zxb.web.servlet.view.CustomizeInternalResourceViewResolver;
-import org.apache.catalina.Context;
-import org.springframework.boot.autoconfigure.web.servlet.TomcatServletWebServerFactoryCustomizer;
-import org.springframework.boot.web.embedded.tomcat.TomcatContextCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -25,6 +22,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     /**
      * 配置Jsp 视图解析器
+     *
      * @return
      */
     @Bean
@@ -40,6 +38,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     /**
      * 解决Maven多模块，JSP无法读取的问题，修复SpringBoot获取多maven项目的路径问题
+     *
      * @return
      */
     @Bean
@@ -53,5 +52,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 context.setDocBase(docBaseFile.getAbsolutePath());
             }
         });
+    }
+
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.favorParameter(true)
+                .favorPathExtension(true);
     }
 }
