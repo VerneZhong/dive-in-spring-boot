@@ -58,12 +58,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     /**
-     * 内容协商
+     * 内容协商添加策略
      * @param configurer
      */
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        // 配置允许添加策略
+        // 允许添加请求参数 ParameterContentNegotiationStrategy 策略
         configurer.favorParameter(true)
+                // 允许添加路径扩展名 PathExtensionContentNegotiationStrategy 策略
                 .favorPathExtension(true);
     }
 }

@@ -14,7 +14,7 @@ public class HelloWorldController {
 
     @RequestMapping("/index")
     public String index() {
-        return "index";
+        return "hello";
     }
 
     @RequestMapping("/hello")
@@ -25,7 +25,7 @@ public class HelloWorldController {
 
     @RequestMapping("/err")
     public String error(@RequestParam int value) {
-        return "index";
+        return "hello";
     }
 
     @RequestMapping("/thymeleaf")
