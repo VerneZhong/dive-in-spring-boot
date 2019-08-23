@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Mr.zxb
  * @date 2019-08-22 17:16
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.zxb.web"})
 public class SpringBootRestBootstrap {
 
     public static void main(String[] args) {
