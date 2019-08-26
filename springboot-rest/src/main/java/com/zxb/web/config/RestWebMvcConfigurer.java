@@ -1,11 +1,13 @@
 package com.zxb.web.config;
 
 import com.zxb.web.http.converter.properties.PropertiesHttpMessageConverter;
-import com.zxb.web.support.PropertiesHandlerMethodArgumentResolver;
+import com.zxb.web.method.suppot.PropertiesHandlerMethodArgumentResolver;
+import com.zxb.web.method.suppot.PropertiesHandlerMethodReturnValueHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
@@ -39,6 +41,13 @@ public class RestWebMvcConfigurer implements WebMvcConfigurer {
 
         // 重新设置 Resolver 集合
         requestMappingHandlerAdapter.setArgumentResolvers(modifiableResolvers);
+
+        // 重新设置 ReturnValueHandler 集合
+        List<HandlerMethodReturnValueHandler> returnValueHandlers = requestMappingHandlerAdapter.getReturnValueHandlers();
+        List<HandlerMethodReturnValueHandler> modifiableHandlers = new ArrayList<>(returnValueHandlers.size() + 1);
+        modifiableHandlers.add(new PropertiesHandlerMethodReturnValueHandler());
+        modifiableHandlers.addAll(returnValueHandlers);
+        requestMappingHandlerAdapter.setReturnValueHandlers(modifiableHandlers);
     }
 
     @Override
