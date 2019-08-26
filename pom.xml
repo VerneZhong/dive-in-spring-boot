@@ -23,6 +23,7 @@
         <module>springboot-webmvc</module>
         <module>springboot-view</module>
         <module>springboot-rest</module>
+        <module>spring-servlet</module>
     </modules>
 
 	<name>dive-in-spring-boot</name>
