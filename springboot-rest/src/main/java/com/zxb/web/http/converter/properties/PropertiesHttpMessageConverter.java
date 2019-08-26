@@ -20,7 +20,7 @@ import java.util.Properties;
  * @author Mr.zxb
  * @date 2019-08-23 16:43
  */
-public class PropertiesHttpMessageConverter extends AbstractGenericHttpMessageConverter<Properties> {
+public class  PropertiesHttpMessageConverter extends AbstractGenericHttpMessageConverter<Properties> {
 
     public PropertiesHttpMessageConverter() {
         // 设置支持的MediaType
@@ -65,7 +65,6 @@ public class PropertiesHttpMessageConverter extends AbstractGenericHttpMessageCo
      */
     @Override
     protected Properties readInternal(Class<? extends Properties> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
-
         // 字符流-> 字符编码
         // 从请求头Content-Type 解析编码
         final HttpHeaders headers = inputMessage.getHeaders();

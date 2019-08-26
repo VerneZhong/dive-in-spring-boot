@@ -20,6 +20,7 @@ import java.util.Properties;
 
 /**
  * {@link Properties 类型} {@link HandlerMethodArgumentResolver} 实现
+ *
  * @author Mr.zxb
  * @date 2019-08-26 15:27
  */
@@ -31,15 +32,8 @@ public class PropertiesHandlerMethodArgumentResolver implements HandlerMethodArg
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-
-        // 复用 PropertiesHttpMessageConverter
-        PropertiesHttpMessageConverter converter = new PropertiesHttpMessageConverter();
-
-        ServletWebRequest servletWebRequest = (ServletWebRequest) webRequest;
-
         // Servlet Request API
-        HttpServletRequest request = servletWebRequest.getRequest();
-
+        HttpServletRequest request = ((ServletWebRequest) webRequest).getRequest();
         HttpInputMessage httpInputMessage = new ServletServerHttpRequest(request);
 
 //        // 获取Content-Type 中的媒体类型
@@ -53,6 +47,8 @@ public class PropertiesHandlerMethodArgumentResolver implements HandlerMethodArg
 //        Properties properties = new Properties();
 //        properties.load(inputStreamReader);
 
+        // 复用 PropertiesHttpMessageConverter
+        PropertiesHttpMessageConverter converter = new PropertiesHttpMessageConverter();
         return converter.read(null, httpInputMessage);
     }
 }

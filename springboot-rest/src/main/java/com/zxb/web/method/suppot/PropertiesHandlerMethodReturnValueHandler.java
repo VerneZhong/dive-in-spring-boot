@@ -32,7 +32,6 @@ public class PropertiesHandlerMethodReturnValueHandler implements HandlerMethodR
         // 强制转换类型
         Properties properties = (Properties) returnValue;
 
-        // 复用 PropertiesHttpMessageConverter
         PropertiesHttpMessageConverter converter = new PropertiesHttpMessageConverter();
 
         ServletWebRequest servletWebRequest = (ServletWebRequest) webRequest;
@@ -44,6 +43,9 @@ public class PropertiesHandlerMethodReturnValueHandler implements HandlerMethodR
         // 获取 Servlet Response 对象
         final ServletServerHttpResponse outputMessage = new ServletServerHttpResponse(servletWebRequest.getResponse());
         converter.write(properties, mediaType, outputMessage);
+
+        // 告知 Spring Web MVC 当前请求已经处理完毕
+        mavContainer.setRequestHandled(true);
     }
 
 }
