@@ -9,9 +9,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.util.Optional;
@@ -25,15 +23,46 @@ import java.util.Properties;
 public class PropertiesHttpMessageConverter extends AbstractGenericHttpMessageConverter<Properties> {
 
     public PropertiesHttpMessageConverter() {
-        // 设置支持的MediaType 
+        // 设置支持的MediaType
         super(new MediaType("text", "properties"));
     }
 
+    /**
+     * 写操作
+     * @param properties
+     * @param type
+     * @param outputMessage
+     * @throws IOException
+     * @throws HttpMessageNotWritableException
+     */
     @Override
     protected void writeInternal(Properties properties, Type type, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+        // Properties -> String
+        // OutputStream -> Writer
 
+        final HttpHeaders headers = outputMessage.getHeaders();
+        final MediaType mediaType = headers.getContentType();
+        // 获取字符编码
+        Charset charset = Optional.ofNullable(mediaType.getCharset())
+                .orElse(Charset.forName("UTF-8"));
+
+        // 字节输出流
+        final OutputStream outputStream = outputMessage.getBody();
+        // 字符输出流
+        final Writer wr = new OutputStreamWriter(outputStream, charset);
+
+        // Properties 写入到字符输出流
+        properties.store(wr, "From PropertiesHttpMessageConverter writeInternal");
     }
 
+    /**
+     * 读操作
+     * @param clazz
+     * @param inputMessage
+     * @return
+     * @throws IOException
+     * @throws HttpMessageNotReadableException
+     */
     @Override
     protected Properties readInternal(Class<? extends Properties> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
 
@@ -58,8 +87,8 @@ public class PropertiesHttpMessageConverter extends AbstractGenericHttpMessageCo
 
     @Override
     public Properties read(Type type, Class<?> contextClass, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
-
-
-        return null;
+        return readInternal(null, inputMessage);
     }
+
+
 }

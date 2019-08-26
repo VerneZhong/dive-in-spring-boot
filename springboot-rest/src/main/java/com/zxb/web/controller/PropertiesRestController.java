@@ -18,7 +18,7 @@ public class PropertiesRestController {
             // 过滤媒体类型，Content-Type
             consumes = "text/properties;charset=UTF-8"
             )
-    public String addProperties(@RequestBody Properties properties) {
-        return "success";
+    public Properties addProperties(@RequestBody Properties properties) {
+        return properties;
     }
 }
