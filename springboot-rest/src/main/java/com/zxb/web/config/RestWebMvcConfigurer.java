@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
@@ -27,7 +28,7 @@ public class RestWebMvcConfigurer implements WebMvcConfigurer {
     @Autowired
     private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         // 获取当前 RequestMappingHandlerAdapter 所有的 Resolver 对象
         List<HandlerMethodArgumentResolver> resolvers = requestMappingHandlerAdapter.getArgumentResolvers();
@@ -54,7 +55,7 @@ public class RestWebMvcConfigurer implements WebMvcConfigurer {
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         // 不建议添加到converters的末尾，会导致优先级的问题，不会生效
 //        converters.add(new PropertiesHttpMessageConverter());
-        converters.add(0, new PropertiesHttpMessageConverter());
+//        converters.add(0, new PropertiesHttpMessageConverter());
     }
 
 //    @Override
@@ -63,4 +64,13 @@ public class RestWebMvcConfigurer implements WebMvcConfigurer {
 //        // 添加自定义HandlerMethodArgumentResolver， 优先级低于内建 HandlerMethodArgumentResolver
 //        resolvers.add(0, new PropertiesHandlerMethodArgumentResolver());
 //    }
+
+    /**
+     * 添加跨域操作的第二种方式
+     * @param registry
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedOrigins("*");
+    }
 }
