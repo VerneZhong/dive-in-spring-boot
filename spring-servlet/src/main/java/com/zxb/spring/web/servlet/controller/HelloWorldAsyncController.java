@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.Random;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Callable;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -43,10 +43,16 @@ public class HelloWorldAsyncController {
         } while (result != null);
     }
 
+    /**
+     * DeferredResult 和 Schedule 实现异步操作
+     *
+     * @return
+     */
     @GetMapping("/hello-world")
     public DeferredResult<String> hello() {
         DeferredResult<String> deferredResult = new DeferredResult<>(50L);
 
+        // 同步操作
 //        deferredResult.setResult("hello， World");
 
         // 入队操作
@@ -58,7 +64,23 @@ public class HelloWorldAsyncController {
         return deferredResult;
     }
 
+    /**
+     * Callable异步操作
+     *
+     * @return
+     */
+    @GetMapping("/call")
+    public Callable<String> call() {
+        final long startTime = System.currentTimeMillis();
+        println("执行call.");
+        return () -> {
+            println("执行 call 计算结果，消耗：" + (System.currentTimeMillis() - startTime) + " ms.");
+            return "hello call";
+        };
+    }
+
     private static void println(Object o) {
         System.out.println("HelloWorldAsyncController [" + Thread.currentThread().getName() + "]: " + o);
     }
+
 }
