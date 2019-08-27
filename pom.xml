@@ -24,6 +24,7 @@
         <module>springboot-view</module>
         <module>springboot-rest</module>
         <module>spring-servlet</module>
+        <module>spring-boot-servlet</module>
     </modules>
 
 	<name>dive-in-spring-boot</name>
