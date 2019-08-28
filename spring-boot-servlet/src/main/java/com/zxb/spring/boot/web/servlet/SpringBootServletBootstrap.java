@@ -33,7 +33,9 @@ public class SpringBootServletBootstrap {
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public ServletRegistrationBean asyncServletServletRegistrationBean() {
-        return new ServletRegistrationBean(new AsyncServlet(), "/");
+        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new AsyncServlet(), "/");
+        servletRegistrationBean.setName("MyAsyncServlet");
+        return servletRegistrationBean;
     }
 
     @Bean
