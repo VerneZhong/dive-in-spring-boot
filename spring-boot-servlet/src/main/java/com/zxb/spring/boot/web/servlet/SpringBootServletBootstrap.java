@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -21,7 +22,7 @@ import java.util.EnumSet;
  */
 @EnableAutoConfiguration
 // Servlet 组件扫描
-//@ServletComponentScan(basePackages = "com.zxb.spring.web.servlet")
+@ServletComponentScan(basePackages = "com.zxb.spring.web.servlet")
 public class SpringBootServletBootstrap {
 
     public static void main(String[] args) {
@@ -31,8 +32,8 @@ public class SpringBootServletBootstrap {
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public AsyncServlet asyncServlet() {
-        return new AsyncServlet();
+    public ServletRegistrationBean asyncServletServletRegistrationBean() {
+        return new ServletRegistrationBean(new AsyncServlet(), "/");
     }
 
     @Bean
