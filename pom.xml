@@ -25,6 +25,7 @@
         <module>springboot-rest</module>
         <module>spring-servlet</module>
         <module>spring-boot-servlet</module>
+        <module>spring-reactive</module>
     </modules>
 
 	<name>dive-in-spring-boot</name>
