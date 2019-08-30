@@ -40,5 +40,8 @@ public class ParallelDataLoader extends DataLoader {
 
     public static void main(String[] args) {
         new ParallelDataLoader().load();
+
+        System.out.println(Runtime.getRuntime().availableProcessors());
+
     }
 }
