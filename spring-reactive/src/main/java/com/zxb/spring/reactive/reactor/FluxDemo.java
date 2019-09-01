@@ -1,5 +1,7 @@
 package com.zxb.spring.reactive.reactor;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
@@ -20,15 +22,49 @@ public class FluxDemo {
 //                .publishOn(Schedulers.elastic())
                 // 转换
                 .map(p -> p + "-")
-                .subscribe(
-                        // 数据消费
-                        FluxDemo::println,
-                        // 异常处理
-                        FluxDemo::println,
-                        // 完成回调
-                        () -> println("任务执行完成..."),
-                        // 背压操作
-                        subscription -> subscription.request(Integer.MAX_VALUE));
+//                .subscribe(
+//                        // 数据消费 == onNext(T)
+//                        FluxDemo::println,
+//                        // 异常处理 == onError(Throwable)
+//                        FluxDemo::println,
+//                        // 完成回调 == onComplete()
+//                        () -> println("任务执行完成..."),
+//                        // 背压操作 == onSubscribe(Subscription)
+//                         subscription -> {
+//                             // 取消上游传输数据到下游
+//                             subscription.cancel();
+//                             // n请求的元素数量
+//                             subscription.request(Integer.MAX_VALUE);
+//                         });
+                // 匿名类的方式
+                .subscribe(new Subscriber<String>() {
+
+                    private int count = 1;
+
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(1);
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        System.out.println("onNext() " + s);
+                        if (count == 1) {
+                            throw new RuntimeException("数字异常");
+                        }
+                        count++;
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        System.out.println("onError() " + t.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        System.out.println("onComplete()");
+                    }
+                });
 
         Thread.sleep(2000);
     }
