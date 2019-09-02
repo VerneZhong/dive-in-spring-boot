@@ -41,15 +41,18 @@ public class FluxDemo {
 
                     private int count = 1;
 
+                    private Subscription subscription;
+
                     @Override
                     public void onSubscribe(Subscription s) {
-                        s.request(1);
+                        subscription = s;
+                        subscription.request(3);
                     }
 
                     @Override
                     public void onNext(String s) {
                         System.out.println("onNext() " + s);
-                        if (count == 1) {
+                        if (count == 4) {
                             throw new RuntimeException("数字异常");
                         }
                         count++;
