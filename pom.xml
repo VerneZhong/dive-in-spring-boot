@@ -27,6 +27,7 @@
         <module>spring-boot-servlet</module>
         <module>spring-reactive</module>
         <module>springboot-webflux</module>
+        <module>spring-external-configuration</module>
     </modules>
 
 	<name>dive-in-spring-boot</name>
