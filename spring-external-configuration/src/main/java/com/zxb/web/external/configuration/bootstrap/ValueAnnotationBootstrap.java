@@ -19,6 +19,17 @@ import static org.springframework.context.ConfigurableApplicationContext.ENVIRON
 
 /**
  * @Value 注解示例
+ *
+ * 获取 Environment Bean
+ * Environment 方法/构造器依赖注入
+ * Environment @Autowired 依赖注入
+ * EnvironmentAware 接口回调
+ * BeanFactory 依赖查找 Environment
+ * 执行顺序：
+ *          1、@Autowired
+ *          2、BeanFactoryAware
+ *          3、EnvironmentAware
+ *
  * @author Mr.zxb
  * @date 2019-09-05 10:44
  */
@@ -48,6 +59,9 @@ public class ValueAnnotationBootstrap implements BeanFactoryAware, EnvironmentAw
 
     @Override
     public void setEnvironment(Environment environment) {
+        if (this.environment != environment) {
+            throw new IllegalStateException();
+        }
         this.environment = environment;
     }
 
