@@ -3,6 +3,7 @@ package com.zxb.web.external.configuration.bootstrap;
 import com.zxb.web.external.configuration.entity.UserProperties;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -27,6 +28,9 @@ public class ConfigurationPropertiesBootstrap {
 
     @Bean
     @ConfigurationProperties(prefix = "user")
+    // ConditionalOnProperty prefix name 要与 application.propertie 完全一致
+    // 在环境变量（OS Environment variables）里面，允许松散绑定 USER_CITY_POST_CODE=020
+    @ConditionalOnProperty(prefix = "user.", name = "city.post-code", havingValue = "010")
     public UserProperties user() {
         return new UserProperties();
     }
