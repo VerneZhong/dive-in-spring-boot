@@ -1,3 +1,7 @@
 # Run Listeners
 org.springframework.boot.SpringApplicationRunListener=\
 com.zxb.web.external.configuration.listener.ExtendPropertySourcesRunListener
+
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+com.zxb.web.external.configuration.listener.ExtendPropertySourcesEventListener

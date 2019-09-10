@@ -3,7 +3,6 @@ package com.zxb.web.external.configuration.listener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.boot.context.event.EventPublishingRunListener;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -16,6 +15,8 @@ import java.util.Map;
 
 /**
  * 扩展 {@link PropertySources}
+ * 基于SpringApplicationRunListener.environmentPrepared 扩展外部化配置属性源
+ *
  * @author Mr.zxb
  * @date 2019-09-10 14:55
  */
@@ -77,7 +78,7 @@ public class ExtendPropertySourcesRunListener implements SpringApplicationRunLis
     @Override
     public int getOrder() {
         // 确保在 EventPublishingRunListener 之后执行
-//        return new EventPublishingRunListener(application, args).getOrder() + 1;
-        return Ordered.LOWEST_PRECEDENCE;
+        return new EventPublishingRunListener(application, args).getOrder() - 1;
+
     }
 }
