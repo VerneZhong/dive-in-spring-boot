@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Mr.zxb
  * @date 2019-08-14 14:11
  */
-@ComponentScan(basePackages = "com.zxb.diveinspringboot.repository")
+@ComponentScan(basePackages = "com.zxb.diveinspringboot.autoconfigure.repository")
 public class RepositoryBootstrap {
 
     public static void main(String[] args) {
