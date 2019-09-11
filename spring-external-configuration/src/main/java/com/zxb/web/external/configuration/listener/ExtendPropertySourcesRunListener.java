@@ -44,7 +44,7 @@ public class ExtendPropertySourcesRunListener implements SpringApplicationRunLis
         // from-environmentPrepared 0
         // application.properties   1
         // META-INF/default.properties  7
-        source.put("user.id", 0);
+        source.put("user.id", 1);
         MapPropertySource mapPropertySource = new MapPropertySource("from-environmentPrepared", source);
 
         propertySources.addFirst(mapPropertySource);
@@ -78,7 +78,7 @@ public class ExtendPropertySourcesRunListener implements SpringApplicationRunLis
     @Override
     public int getOrder() {
         // 确保在 EventPublishingRunListener 之后执行
-        return new EventPublishingRunListener(application, args).getOrder() - 1;
+        return new EventPublishingRunListener(application, args).getOrder() + 1;
 
     }
 }

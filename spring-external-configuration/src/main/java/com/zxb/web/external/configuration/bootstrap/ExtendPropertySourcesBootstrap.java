@@ -23,9 +23,9 @@ public class ExtendPropertySourcesBootstrap {
         ConfigurableApplicationContext context = new SpringApplicationBuilder(ExtendPropertySourcesBootstrap.class)
                 .web(WebApplicationType.NONE)
                 // Default properties
-                .properties("user.id=99")
+                .properties("user.id=6")
                 // Command line arguments
-                .run(of("--user.id=88"));
+                .run(of("--user.id=5"));
 
         // 获取Environment对象
         final ConfigurableEnvironment environment = context.getEnvironment();

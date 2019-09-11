@@ -26,7 +26,7 @@ public class ExtendPropertySourcesEventListener implements ApplicationListener<A
         // 2.from-environmentPrepared 9
         // application.properties   1
         // META-INF/default.properties  7
-        source.put("user.id", 0);
+        source.put("user.id", 2);
         MapPropertySource mapPropertySource = new MapPropertySource("from-ApplicationEnvironmentPreparedEvent", source);
         propertySources.addFirst(mapPropertySource);
     }
