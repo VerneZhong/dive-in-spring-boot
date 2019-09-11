@@ -9,3 +9,7 @@ com.zxb.web.external.configuration.listener.ExtendPropertySourcesEventListener
 # Environment Post Processors
 org.springframework.boot.env.EnvironmentPostProcessor=\
 com.zxb.web.external.configuration.processor.ExtendPropertySourcesEnvironmentPostProcessor
+
+# Application Context Initializers
+org.springframework.context.ApplicationContextInitializer=\
+com.zxb.web.external.configuration.initializer.ExtendPropertySourcesApplicationContextInitializer

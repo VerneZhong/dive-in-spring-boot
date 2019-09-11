@@ -41,7 +41,7 @@ public class ExtendPropertySourcesRunListener implements SpringApplicationRunLis
         final MutablePropertySources propertySources = environment.getPropertySources();
 
         Map<String, Object> source = new HashMap<>(16);
-        // from-environmentPrepared 0
+        // 1.from-environmentPrepared 0
         // application.properties   1
         // META-INF/default.properties  7
         source.put("user.id", 1);
@@ -52,12 +52,35 @@ public class ExtendPropertySourcesRunListener implements SpringApplicationRunLis
 
     @Override
     public void contextPrepared(ConfigurableApplicationContext context) {
-
+        MutablePropertySources propertySources = context.getEnvironment().getPropertySources();
+        Map<String, Object> source = new HashMap<>(16);
+        // 1.from-contextPrepared : -1
+        // 2.from-ApplicationContextInitializer : 0
+        // 3.from-ApplicationEnvironmentPreparedEvent 1
+        // 4.from-environmentPrepared 2
+        // 5.from-EnvironmentPostProcessor 3
+        // application.properties   1
+        // META-INF/default.properties  7
+        source.put("user.id", -1);
+        // 排在最后的覆盖前面的
+        propertySources.addFirst(new MapPropertySource("from-contextPrepared", source));
     }
 
     @Override
     public void contextLoaded(ConfigurableApplicationContext context) {
-
+        MutablePropertySources propertySources = context.getEnvironment().getPropertySources();
+        Map<String, Object> source = new HashMap<>(16);
+        // 1.from-contextLoaded : -2
+        // 1.from-contextPrepared : -1
+        // 2.from-ApplicationContextInitializer : 0
+        // 3.from-ApplicationEnvironmentPreparedEvent 1
+        // 4.from-environmentPrepared 2
+        // 5.from-EnvironmentPostProcessor 3
+        // application.properties   1
+        // META-INF/default.properties  7
+        source.put("user.id", -2);
+        // 排在最后的覆盖前面的
+        propertySources.addFirst(new MapPropertySource("from-contextLoaded", source));
     }
 
     @Override
